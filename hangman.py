@@ -18,22 +18,27 @@ def checkLetter(word, guessArray, letter):
             guessArray[i] = letter
             correctGuess = True
 
-    return True
+            print("Correct Guess!")
+
+    return correctGuess
 
 def checkWin(guessArray):
-    print("here")
     for i in range(0, len(guessArray)):
         if guessArray[i] == "_":
-            print("here")
             return False
     
     return True
-guessArray = []
 
-#chosenWord = chooseWord()
-chosenWord = "molly"
+LIVES = 6
+
+# create lists and variables
+guessArray = []
+chosenWord = chooseWord()
 word = []
 game = True
+currentLives = LIVES
+
+
 
 for i in range(0, len(chosenWord)):
     guessArray.append("_")
@@ -43,12 +48,20 @@ while game:
 
     printWord(guessArray)
 
+    print(f"you have {currentLives} lives left")
+
     guess = input("what letter would you like to guess: ").lower()
 
-    checkLetter(word, guessArray, guess)
+    correctGuess = checkLetter(word, guessArray, guess)
 
-    if checkWin:
+    if correctGuess == False:
+        currentLives -= 1
+
+    if checkWin(guessArray):
+        print("you won!")
         game = False
 
-
-print("you won!")
+    # check loss
+    if currentLives <= 0:
+        print("you lost")
+        game = False
