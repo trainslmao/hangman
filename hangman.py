@@ -12,13 +12,19 @@ def printWord(wordArr):
     print()
     
 def checkLetter(word, guessArray, letter):
+    correctGuess = False
     for i in range(0, len(word)):
         if letter == word[i]:
             guessArray[i] = letter
+            correctGuess = True
+
+    return True
 
 def checkWin(guessArray):
+    print("here")
     for i in range(0, len(guessArray)):
         if guessArray[i] == "_":
+            print("here")
             return False
     
     return True
@@ -37,4 +43,12 @@ while game:
 
     printWord(guessArray)
 
-    guess 
+    guess = input("what letter would you like to guess: ").lower()
+
+    checkLetter(word, guessArray, guess)
+
+    if checkWin:
+        game = False
+
+
+print("you won!")
